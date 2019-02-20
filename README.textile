@@ -10,7 +10,9 @@ h2. How do I use this?
 
 First prepare your audio files with the marker so your camera or microphone can record it. The marker has the following properties. It is a square  wave with a frequency of 480.5Hz that is on for 200ms off (silent) for 100ms and on for 200ms, off for 100ms and finally on for 200ms. If you have recorded the files with markers place them into a single folder. A prepared marker can be found in the docs folder.
 
-Install a "recent JRE":http://java.com, download the "ready build audio marker finder":https://github.com/ArtScienceLab/AudioMarkerFinder/raw/master/build/2019.02.19.AudioMarkerFinder.jar and choose a folder with your media files that contain audio with the marker present and in the text box below a number of timestamps should appear where the marker was found. A percentage score is also given. It is probable that false positives are present but using the scores these can be filtered out by the user. This is to allow a larger marker/noise ratio. In the screenshot below it is clear that there is one marker in the first audio file and two markers in the second (scores jump from +-97% to +-70%).
+Install a "recent JRE":http://java.com, download the "ready build audio marker finder":https://github.com/ArtScienceLab/AudioMarkerFinder/raw/master/build/2019.02.19.AudioMarkerFinder.jar and choose a folder with your media files that contain audio with the marker present and in the text box below a number of timestamps should appear where the marker was found. A percentage score is also given. 
+
+It is probable that false positives are present but using the scores these can be filtered out by the user. This is to allow a larger marker/noise ratio. In the screenshot below it is probable that the marker in the first audio file is a false positive, while the second audio files contains a true positive (scores jump from +-100% to +-70%).
 
 !/docs/screenshot.png!
 
