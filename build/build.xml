@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="marker" name="Create audio marker finder">
+
+	<!-- Configuration -->
+	<property name="version"   value="1.1"/>
+	<property name="built_by"  value="${user.name}"/>
+
+	<property name="ant.build.javac.source" value="1.8"/>
+	<property name="ant.build.javac.target" value="1.8"/>
+
+	<!-- run the ant timestamp task -->
+	 <tstamp>
+	      <format property="TODAY_MY" pattern="yyyy.MM.dd"  locale="en,UK" />
+	 </tstamp>
+
+	<!-- Compile the source files -->
+	<target name="compile" description="The compile task" >
+		<mkdir dir="../bin" />
+		<javac srcdir="../src" destdir="../bin" classpath="" includeantruntime="false"  >
+			<classpath>
+				<fileset dir="../lib" includes="*.jar" />
+			</classpath>
+		</javac>
+	</target>
+
+	<!-- Clean the build directory -->
+	<target name="clean" description="Clean the build directory">
+		<delete dir="../bin" />
+	</target>
+
+	<!-- Build the jar -->
+	<target name="marker" depends="compile" description="Build the AudioMarkerFinder">
+	
+		<!-- With included source files -->
+		<jar destfile="../build/${TODAY_MY}.AudioMarkerFinder.jar" filesetmanifest="mergewithoutmain" duplicate="preserve">
+			<manifest>
+				<attribute name="Main-Class" value="be.ugent.audiomarkersync.AudioMarkerFinderFrame"/>
+				<attribute name="Implementation-Version" value="${version}-${DSTAMP}"/>
+				<attribute name="Built-Date" value="${TODAY}"/>
+			</manifest>
+
+			<!-- Compiled files -->
+			<fileset dir="../bin"/>
+
+			<!-- Include external libraries -->
+			<zipfileset excludes="META-INF/*.SF" src="../lib/TarsosDSP-2.4.jar"/>
+
+			<!-- include source files -->
+			<fileset dir="../src">
+				<include name="**/*.java"/>
+			</fileset>
+		</jar>		
+	</target>
+	
+	
+	<!-- Build the library documentation -->
+	<target name="javadoc" description="Build the library documentation">
+		<javadoc access="public" author="true" classpath="../lib/TarsosDSP-2.4.jar" 
+			destdir="doc" 
+			doctitle="AudioMarker ${version}-${DSTAMP}" 
+			nodeprecated="false" 
+			nodeprecatedlist="false" 
+			noindex="false" 
+			nonavbar="false" 
+			notree="false" 
+			packagenames="be.ugent.lijogger" 
+			source="1.8" 
+			sourcepath="../src" 
+			splitindex="true" 
+			use="true" version="true"/>
+	</target>
+
+</project>
